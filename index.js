@@ -1,17 +1,10 @@
 // variables de entorno 
-require('dotenv').config();
+require('dotenv').config(); 
+express = require('express'); 
+const app = express();
 
-const express = require("express"),
-    app = express()
-
-
-app.get('/test', (peticion, respuesta) => {
-    let mascota = {
-        nombre: "Maggie",
-        edad: 2,
-    };
-    respuesta.json(mascota);
-});
+//Ruta de prueba
+app.use('/api/test', require('./routes/test'))
 
 // Una vez definidas nuestras rutas podemos iniciar el servidor
 app.listen(process.env.PORT, err => {
