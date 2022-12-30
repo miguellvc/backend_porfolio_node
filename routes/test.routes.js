@@ -4,7 +4,7 @@ const router = Router();
 
 const { 
     getTest
-} = require('../controllers/test')
+} = require('../controllers/test.controller')
 
 router.get('/', getTest)
 
