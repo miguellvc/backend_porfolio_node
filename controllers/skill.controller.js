@@ -1,8 +1,8 @@
+const { get } = require('../util/request')
+
 const getSkills = (req, resp) => {
-    resp.json({
-        status : "ok",
-        msg: "se envían todos los datos de las skills"
-    })
+    let query = 'SELECT * FROM skill';
+    get(req, resp, query);
 }
 
 module.exports = {

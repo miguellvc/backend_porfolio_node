@@ -1,11 +1,9 @@
+const { get } = require('../util/request')
+
 
 const getBanners = (req, resp) => {
-    resp.json(
-        {
-            status : "ok",
-            msg: "Se envian todos los datos del banner"
-        }
-    )
+    let query = 'SELECT * FROM banner';
+    get(req, resp, query);
 }
 
 

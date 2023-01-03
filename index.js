@@ -1,5 +1,5 @@
 // variables de entorno 
-require('dotenv').config(); 
+require('dotenv').config();
 express = require('express'); 
 const app = express();
 
@@ -14,6 +14,13 @@ app.use('/api/certificate', require('./routes/certificate.route'))
 app.use('/api/education', require('./routes/education.route'))
 app.use('/api/skill', require('./routes/skill.route'))
 
+/*******
+ * 
+ *  
+ * 
+ * ***********/ 
+const { dbConnection } = require('./database/config');
+dbConnection(); 
 
 // Una vez definidas nuestras rutas podemos iniciar el servidor
 app.listen(process.env.PORT, err => {
