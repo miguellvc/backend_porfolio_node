@@ -1,16 +1,22 @@
-const { get } = require('../util/request')
+const { get, gets } = require('../util/request')
+
+
+
+const getEducation = (req, resp) => {
+    
+    let query = `SELECT * FROM education where id = ${req.params.id}`;
+    gets(req, resp, query);
+    
+}
 
 const getEducations = (req, resp) => {
     
     let query = 'SELECT * FROM education';
-    get(req, resp, query);
+    gets(req, resp, query);
     
-    // resp.json({
-    //     status: "ok", 
-    //     msg : "se envían todos los datos de educación"
-    // })
 }
 
 module.exports = {
+    getEducation,
     getEducations
 }

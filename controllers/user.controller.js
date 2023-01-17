@@ -1,9 +1,9 @@
-const { get } = require('../util/request')
+const { gets } = require('../util/request')
 
 
 const getUsers = (req, resp) => {
     let query = 'SELECT * FROM user';
-    get(req, resp, query);
+    gets(req, resp, query);
 }
 
 
