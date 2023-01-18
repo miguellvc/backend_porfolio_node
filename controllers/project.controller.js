@@ -1,4 +1,4 @@
-const { get, gets } = require('../util/request')
+const { get, gets, post } = require('../util/request')
 
 
 const getProject = (req, resp) => {
@@ -11,8 +11,14 @@ const getProjects = (req, resp) => {
     gets(req, resp, query);
 }
 
+const postProject = (req, resp) => {
+    const { title, url_Img, url_Git} = req.body;
+    let query = `INSERT INTO project (title, url_Img, url_Git) VALUES ('${title}', '${url_Img}', '${url_Git}')`;
+    post(req, resp, query);
+}
 
 module.exports = {
     getProject,
-    getProjects
+    getProjects,
+    postProject,
 }

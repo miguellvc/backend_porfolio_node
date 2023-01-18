@@ -3,6 +3,9 @@ require('dotenv').config();
 express = require('express'); 
 const app = express();
 
+//lectura y parseo del body
+app.use(express.json());
+
 //Ruta de prueba
 app.use('/api/test', require('./routes/test.routes'))
 

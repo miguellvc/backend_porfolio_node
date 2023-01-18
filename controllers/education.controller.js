@@ -1,4 +1,4 @@
-const { get, gets } = require('../util/request')
+const { get, gets, post } = require('../util/request')
 
 
 
@@ -16,7 +16,15 @@ const getEducations = (req, resp) => {
     
 }
 
+const postEducation = (req, resp) => {
+    const {certificate, description, year, color} = req.body; 
+    let query = `INSERT INTO education (certificate, description, year, color) VALUES ('${certificate}', '${description}', '${year}', '${color}')`;
+    post(req, resp, query);
+    
+}
+
 module.exports = {
     getEducation,
-    getEducations
+    getEducations,
+    postEducation
 }

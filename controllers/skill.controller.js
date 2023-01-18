@@ -1,4 +1,4 @@
-const { get, gets } = require('../util/request')
+const { get, gets, post } = require('../util/request')
 
 const getSkill = (req, resp) => {
     let query = `SELECT * FROM skill where id = ${req.params.id}`;
@@ -10,7 +10,16 @@ const getSkills = (req, resp) => {
     gets(req, resp, query);
 }
 
+const postSkill = (req, resp) => {
+    const { language, porcentage, background, border, color, rotate } = req.body;
+    let query = `INSERT INTO skill (language, porcentage, background, border, color, rotate) VALUES ('${language}', ${porcentage}, '${background}', '${border}', '${color}', '${rotate}' )`;
+    // console.log(req.body)
+    post(req, resp, query);
+}
+
+
 module.exports = {
     getSkill,
-    getSkills
+    getSkills,
+    postSkill
 }
