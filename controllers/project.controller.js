@@ -1,4 +1,4 @@
-const { get, gets, post } = require('../util/request')
+const { get, gets, post, deleteData } = require('../util/request')
 
 
 const getProject = (req, resp) => {
@@ -17,8 +17,15 @@ const postProject = (req, resp) => {
     post(req, resp, query);
 }
 
+const deleteProject = (req, resp) => {
+    const { id } = req.body; 
+    let query = `DELETE FROM project WHERE id = ${id}`;
+    deleteData(req, resp, query);
+}
+
 module.exports = {
     getProject,
     getProjects,
     postProject,
+    deleteProject
 }

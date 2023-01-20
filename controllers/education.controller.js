@@ -1,4 +1,4 @@
-const { get, gets, post } = require('../util/request')
+const { get, gets, post, deleteData } = require('../util/request')
 
 
 
@@ -23,8 +23,15 @@ const postEducation = (req, resp) => {
     
 }
 
+const deleteEducation = (req, resp) => {
+    const { id } = req.body; 
+    let query = `DELETE FROM education WHERE id = ${ id }`;
+    deleteData(req, resp, query);
+}
+
 module.exports = {
     getEducation,
     getEducations,
-    postEducation
+    postEducation,
+    deleteEducation
 }

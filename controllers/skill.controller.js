@@ -1,4 +1,4 @@
-const { get, gets, post } = require('../util/request')
+const { get, gets, post, deleteData } = require('../util/request')
 
 const getSkill = (req, resp) => {
     let query = `SELECT * FROM skill where id = ${req.params.id}`;
@@ -17,9 +17,15 @@ const postSkill = (req, resp) => {
     post(req, resp, query);
 }
 
+const deleteSkill = (req, resp) => {
+    const { id } = req.body;
+    let query = `DELETE FROM skill WHERE id = ${id}`;
+    deleteData(req, resp, query);
+}
 
 module.exports = {
     getSkill,
     getSkills,
-    postSkill
+    postSkill,
+    deleteSkill
 }
