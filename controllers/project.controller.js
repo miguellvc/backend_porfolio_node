@@ -1,4 +1,4 @@
-const { get, gets, post, deleteData } = require('../util/request')
+const { get, gets, post, deleteData, udpadate } = require('../util/request')
 
 
 const getProject = (req, resp) => {
@@ -23,9 +23,16 @@ const deleteProject = (req, resp) => {
     deleteData(req, resp, query);
 }
 
+const updateProject = (req, resp) => {
+    const { id, title, url_Git} = req.body;
+    let query = `UPDATE project SET title = '${title}', url_Git = '${url_Git}' WHERE id = ${id}`;
+    udpadate(req, resp, query);
+}
+
 module.exports = {
     getProject,
     getProjects,
     postProject,
-    deleteProject
+    deleteProject,
+    updateProject
 }

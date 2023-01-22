@@ -29,9 +29,17 @@ const deleteEducation = (req, resp) => {
     deleteData(req, resp, query);
 }
 
+const updateEducation = (req, resp) => {
+    const {id, certificate, description, year, color} = req.body; 
+    let query = `UPDATE education SET certificate = '${certificate}', description = '${description}', year = '${year}', color = '${color}' WHERE id = ${id}`;
+    post(req, resp, query);
+    
+}
+
 module.exports = {
     getEducation,
     getEducations,
     postEducation,
-    deleteEducation
+    deleteEducation,
+    updateEducation
 }

@@ -1,4 +1,4 @@
-const { gets, get, post } = require('../util/request')
+const { gets, get, post, udpadate } = require('../util/request')
 
 const getBanner = (req, resp) => {
     let query = `SELECT * FROM banner where id = ${req.params.id}`;
@@ -23,9 +23,17 @@ const deleteBanner = (req, resp) => {
     post(req, resp, query);
 }
 
+const updateBanner = (req, resp) => {
+    const {id, title, sub_title, content} = req.body;
+    let query = `UPDATE banner SET title = '${title}', sub_title = '${sub_title}', content = '${content}' WHERE id = ${id}`;
+    console.log("se ejecuta el método update en banner controller", id);
+    udpadate(req, resp, query);
+}
+
 module.exports = {
     getBanner,
     getBanners,
     postBanner,
-    deleteBanner
+    deleteBanner,
+    updateBanner
 }

@@ -1,4 +1,4 @@
-const { get, gets, post, deleteData } = require('../util/request')
+const { get, gets, post, deleteData, udpadate } = require('../util/request')
 
 const getSkill = (req, resp) => {
     let query = `SELECT * FROM skill where id = ${req.params.id}`;
@@ -23,9 +23,18 @@ const deleteSkill = (req, resp) => {
     deleteData(req, resp, query);
 }
 
+const updateSkill = (req, resp) => {
+    const { id, language, porcentage, background, border, color, rotate } = req.body;
+    let query = `UPDATE skill SET language = '${language}', porcentage = ${porcentage}, background = '${background}', border = '${border}', color = '${color}', rotate = '${rotate}' WHERE id = ${id}`;
+    // let query = `UPDATE banner SET title = '${title}', sub_title = '${sub_title}', content = '${content}' WHERE id = ${id}`;
+    
+    // console.log(req.body)
+    udpadate(req, resp, query);
+}
 module.exports = {
     getSkill,
     getSkills,
     postSkill,
-    deleteSkill
+    deleteSkill,
+    updateSkill
 }
