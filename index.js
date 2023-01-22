@@ -1,5 +1,4 @@
 // variables de entorno 
-require('dotenv').config();
 express = require('express'); 
 const app = express();
 
@@ -30,7 +29,7 @@ const { dbConnection } = require('./database/config');
 dbConnection(); 
 
 // Una vez definidas nuestras rutas podemos iniciar el servidor
-app.listen(process.env.PORT, err => {
+app.listen(process.env.PORT || 3000, err => {
 
     if (err) {
         // Aquí manejar el error
