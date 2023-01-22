@@ -1,4 +1,4 @@
-const { connection } = require('../database/config')
+const { connection } = require('../database/configDB')
 
 const get = (req, resp, query) => {
     connection.query(query, (error, results) => {

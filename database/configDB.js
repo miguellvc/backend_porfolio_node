@@ -1,11 +1,12 @@
 // require('dotenv').config();
 
 const mysql = require('mysql');
+const { HOST, DATABASE, USER, PASSWORD } = require('../config');
 const connection = mysql.createConnection({
-    host : "localhost",
-    database : "porfolio", 
-    user : "root",
-    password : "",
+    host : HOST,
+    database : DATABASE, 
+    user : USER,
+    password : PASSWORD,
 }); 
 
 const dbConnection = ()  => {

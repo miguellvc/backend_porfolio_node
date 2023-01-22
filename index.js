@@ -1,4 +1,5 @@
-// variables de entorno 
+// variables de entorno
+const { PORT } = require('./config');
 express = require('express'); 
 const app = express();
 
@@ -25,13 +26,13 @@ app.use('/api/user', require('./routes/user.route'))
  *  
  * 
  * ***********/ 
-const { dbConnection } = require('./database/config');
+const { dbConnection } = require('./database/configDB');
 dbConnection(); 
 
 // Una vez definidas nuestras rutas podemos iniciar el servidor
-app.listen(process.env.PORT || 3000, err => {
+app.listen(PORT, err => {
 
-    if (err) {
+    if (err) { 
         // Aquí manejar el error
         console.error("Error escuchando: ", err);
         return;
