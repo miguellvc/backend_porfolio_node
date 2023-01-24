@@ -26,8 +26,8 @@ app.use('/api/user', require('./routes/user.route'))
  *  
  * 
  * ***********/ 
-const { dbConnection } = require('./database/configDB');
-dbConnection(); 
+// const { dbConnection } = require('./database/configDB');
+// dbConnection(); 
 
 // Una vez definidas nuestras rutas podemos iniciar el servidor
 app.listen(PORT, err => {

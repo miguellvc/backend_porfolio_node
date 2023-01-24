@@ -1,4 +1,4 @@
-const PORT = process.env.PORT || 3001;
+const PORT = 3000;
 // const HOST = process.env.HOST || "localhost";
 // const DATABASE = process.env.DATABASE || "porfolio" ;
 // const USER = process.env.USER || "root";

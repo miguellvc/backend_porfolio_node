@@ -1,38 +1,49 @@
 const { connection } = require('../database/configDB')
 
-const get = (req, resp, query) => {
-    connection.query(query, (error, results) => {
-         error ? resp.json({status: "erorr", msg: error }) : resp.json({status: "ok", msg: results });        
-    });
+const get = async (req, resp, query) => {
+    const [row] = await connection.query(query)
+    resp.json({
+        row
+    })
 
 }
 
-const gets = (req, resp, query) => {
-    connection.query(query, (error, results) => {
-         error ? resp.json({status: "erorr", msg: error }) : resp.json({status: "ok", msg: results });        
-    });
-
+const gets = async (req, resp, query) => {
+   const [rows] = await connection.query(query)
+   resp.json({
+    rows
+   })
 }
 
-const post = (req, resp, query) => {
-    connection.query(query, (error, results) => {
-         error ? resp.json({status: "erorr", msg: error }) : 
-         resp.json({status: "ok", msg: results });        
-    });
+const post = async (req, resp, query) => {
+    const respuesta = await connection.query(query)
+    resp.json({
+        respuesta
+    })
 }
 
-const deleteData = (req, resp, query) => {
-    connection.query(query, (error, results) => {
-         error ? resp.json({status: "erorr", msg: error }) : 
-         resp.json({status: "ok", msg: results });        
-    });
+const deleteData = async (req, resp, query) => {
+    // connection.query(query, (error, results) => {
+    //      error ? resp.json({status: "erorr", msg: error }) : 
+    //      resp.json({status: "ok", msg: results });        
+    // });
+
+    const respuesta = await connection.query(query)
+    resp.json({
+        respuesta
+    })
 }
 
-const udpadate = (req, resp, query) => {
-    connection.query(query, (error, results) => {
-         error ? resp.json({status: "erorr", msg: error }) : 
-         resp.json({status: "ok", msg: results });        
-    });
+const udpadate = async (req, resp, query) => {
+    // connection.query(query, (error, results) => {
+    //      error ? resp.json({status: "erorr", msg: error }) : 
+    //      resp.json({status: "ok", msg: results });        
+    // });
+
+    const respuesta = await connection.query(query)
+    resp.json({
+        respuesta
+    })
 }
 
 module.exports = {
