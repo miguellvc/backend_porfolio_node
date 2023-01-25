@@ -2,9 +2,7 @@ const { connection } = require('../database/configDB')
 
 const get = async (req, resp, query) => {
     const [row] = await connection.query(query)
-    resp.json({
-        row
-    })
+    resp.json(row)
 
 }
 
