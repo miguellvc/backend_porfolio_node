@@ -1,8 +1,9 @@
 // variables de entorno
 const { PORT } = require('./config');
+const cors = require('cors');
 express = require('express'); 
 const app = express();
-
+app.use(cors()); //middlewares
 //lectura y parseo del body
 app.use(express.json());
 
