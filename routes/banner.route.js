@@ -1,5 +1,5 @@
 const Router = require('express'); 
-
+const { validateJWT } = require('../middlewares/validate-jwt');
 const router = Router(); 
 
 const {
@@ -12,7 +12,7 @@ const {
 
 router.get('/:id', getBanner);
 router.get('/', getBanners);
-router.post('/', postBanner);
+router.post('/', validateJWT, postBanner);
 router.delete('/', deleteBanner);
 router.put('/', updateBanner);
 

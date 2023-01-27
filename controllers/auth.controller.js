@@ -1,5 +1,5 @@
 const { getLogin } = require('../util/request');
-
+const { generarJWT } = require('../util/jwt')
 const loginUser = (req, resp) => {
     const { password, mail } = req.body; 
     let query = `SELECT * FROM user where mail = '${mail}'`;
@@ -12,8 +12,15 @@ const loginUser = (req, resp) => {
             if(data[0].password === password){
 
                 //generar el token y devolverlo. 
-                
-                resp.json(data);
+                const { id } = data[0];
+                generarJWT(id)
+                .then(token => {
+                    console.log(token);
+                    resp.json(token);
+                }).catch(error => {
+                    resp.json(token);
+                })
+                    
             }
         }else {
             resp.json({
