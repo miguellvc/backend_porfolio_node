@@ -19,6 +19,7 @@ app.use('/api/education', require('./routes/education.route'))
 app.use('/api/skill', require('./routes/skill.route'))
 app.use('/api/project', require('./routes/project.route'))
 app.use('/api/user', require('./routes/user.route'))
+app.use('/api/auth', require('./routes/auth.route'))
 
 
 

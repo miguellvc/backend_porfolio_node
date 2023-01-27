@@ -1,12 +1,17 @@
-const { gets } = require('../util/request')
+const { gets, post } = require('../util/request')
 
 
 const getUsers = (req, resp) => {
-    let query = 'SELECT * FROM user';
+    let query = 'SELECT name, surname, mail, url_img FROM user';
     gets(req, resp, query);
 }
 
-
+const postUser = (req, resp) => {
+    const { name, surname, mail, password, url_img } = req.body;
+    let query = `INSERT INTO user (name, surname, mail, password, url_img) VALUES ('${name}', '${surname}', '${mail}', '${password}', '${url_img}')`;
+    post(req, resp, query);
+}
 module.exports = {
-    getUsers
+    getUsers,
+    postUser
 }

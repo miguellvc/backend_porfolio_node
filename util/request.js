@@ -2,7 +2,7 @@ const { connection } = require('../database/configDB')
 
 const get = async (req, resp, query) => {
 
-    try {
+    try { 
         
         const [rows] = await connection.query(query);
         resp.json({
@@ -122,6 +122,17 @@ const udpadate = async (req, resp, query) => {
         }); 
         
     }
+
+}
+
+const getLogin = async(query) => {
+    console.log(query);  
+    try {
+        const [rows] = await connection.query(query);
+        return rows; 
+    } catch (error) {
+        return error;
+    }
 }
 
 module.exports = {
@@ -129,5 +140,6 @@ module.exports = {
     gets,
     post, 
     deleteData,
-    udpadate
+    udpadate,
+    getLogin
 }
