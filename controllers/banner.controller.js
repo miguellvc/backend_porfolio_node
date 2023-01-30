@@ -1,7 +1,27 @@
-const { gets, get, post, udpadate } = require('../util/request')
+const { gets, get, post, udpadate } = require('../util/request');
+const { transporter, sgMail } = require('../util/emailer');
 
 const getBanner = (req, resp) => {
     let query = `SELECT * FROM banner where id = ${req.params.id}`;
+    // sgMail 
+    const mailOptions = {
+        from: 'miguel.lrvc@gmail.com',
+        to: 'nelycarpio@gmail.com',
+        subject: 'Email verification',
+        html:
+        '<h1>Bicha</h1>'+
+        '<p>Parece que esto funcionó</p>',
+      };
+
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+       console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+          // do something useful
+        }
+      });
+    
     get(req, resp, query);
 }
 

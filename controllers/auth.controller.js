@@ -1,5 +1,6 @@
 const { getLogin } = require('../util/request');
 const { generarJWT } = require('../util/jwt')
+
 const loginUser = (req, resp) => {
     const { password, mail } = req.body; 
     let query = `SELECT * FROM user where mail = '${mail}'`;
@@ -29,11 +30,15 @@ const loginUser = (req, resp) => {
             });
         }
 
-
     })
     
 }
 
+const resetPassword = (req, resp) => {
+    
+}
+
 module.exports = {
-    loginUser
+    loginUser,
+    resetPassword
 }
