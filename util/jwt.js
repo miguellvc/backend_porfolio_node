@@ -1,10 +1,11 @@
 const jwt = require('jsonwebtoken');
 const {JWT_SECRET} = require('../config')
-const generarJWT = (id) => {
+const generarJWT = (id, mail="") => {
 
     return new Promise(( resolve, reject ) =>{
         const payload = {
             id,
+            mail
         }
         jwt.sign(payload, JWT_SECRET, {
             expiresIn: '1y'

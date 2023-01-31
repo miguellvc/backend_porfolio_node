@@ -125,8 +125,7 @@ const udpadate = async (req, resp, query) => {
 
 }
 
-const getLogin = async(query) => {
-    console.log(query);  
+const getLogin = async(query) => {  
     try {
         const [rows] = await connection.query(query);
         return rows; 
