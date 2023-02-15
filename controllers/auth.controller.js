@@ -1,20 +1,21 @@
-const { getLogin } = require('../util/request');
-const { generarJWT } = require('../util/jwt')
+const { udpadate, getLogin } = require('../util/request');
+const { generarJWT } = require('../util/jwt');
+const bcrypt = require('bcryptjs');
 const { transporter, sgMail } = require('../util/emailer');
 
 const loginUser = (req, resp) => {
     const { password, mail } = req.body; 
     let query = `SELECT * FROM user where mail = '${mail}'`;
     getLogin(query)
-    .then(data => {
+    .then(usuario => {
 
-        if(data.length != 0) {
+        if(usuario.length != 0) {
 
-            console.log(data);
-            if(data[0].password === password){
+            console.log(usuario);
+            if(usuario[0].password === password){
 
                 //generar el token y devolverlo. 
-                const { id } = data[0];
+                const { id } = usuario[0];
                 generarJWT(id)
                 .then(token => {
                     console.log(token);
@@ -41,12 +42,12 @@ const resetPassword = (req, resp) => {
     const { mail } = req.body; 
     let query = `SELECT * FROM user where mail = '${mail}'`;
     getLogin(query)
-    .then(data => {
+    .then(usuario => {
 
-        if(data.length != 0) {
+        if(usuario.length != 0) {
 
                 //generar el token y devolverlo. 
-                const { id } = data[0];
+                const { id } = usuario[0];
                 generarJWT(id, mail)
                 .then(token => {
                     // enviar el mail
@@ -66,7 +67,8 @@ const resetPassword = (req, resp) => {
                         if (error) {
                             resp.json({
                                 status: "ok",
-                                msg: "Error en el envío del mail"
+                                msg: "Error en el envío del mail",
+                                token
                             });
                         } else {
                           resp.json({
@@ -98,6 +100,40 @@ const resetPassword = (req, resp) => {
 
 const newPassword = (req, resp) => {
     
+    /*data_x_toke: es una variable que se le agrega a la petición en el req al pasar por el middlewares del 
+    token*/ 
+    const { id, mail } = req.data_x_toke; 
+    const { password, repetPassword } = req.body
+    let query = `SELECT * FROM user where mail = '${mail}'`;
+    getLogin(query)
+    .then(usuario => {
+        
+        if(password == repetPassword) {
+            if(usuario.length != 0) {
+                // encriptar la contraseña.const salt = bcrypt.genSaltSync();
+                const salt = bcrypt.genSaltSync();
+                const passwordBcrypt = bcrypt.hashSync( password, salt );
+                //realizar la consulta para actualizar la clave.
+                const { id, name, surname, mail, url_img } = usuario[0];
+                let query = `UPDATE user SET name = '${name}', surname = '${surname}', mail = '${mail}', url_img = '${url_img}', password = '${passwordBcrypt}' WHERE id = ${id}`;
+                udpadate(req, resp, query);
+            }else {
+                resp.json({
+                    status : "error",
+                    message : "error no fue posible restablecer password", 
+                });
+            }
+        }else {
+            resp.json({
+                status : "error",
+                message : "Las contraseñas no coiciden", 
+            });
+        }
+
+       
+
+    })
+     
 }
 
 const SendMail = (token, mail) => {

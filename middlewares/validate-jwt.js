@@ -17,10 +17,10 @@ const validateJWT = (req, res, next) => {
         
         /*aquí se verifica si el token que viene en la cabecera es igual al 
         token generado*/ 
-        const { id } = jwt.verify( token, JWT_SECRET );
+        const { id, mail } = jwt.verify( token, JWT_SECRET );
         /*esto se realiza para pasar el token al método que se ejecuta 
         al hacer la petición. Por ejemplo al getUsuarios*/
-        req.uid = id;
+        req.data_x_toke = { id, mail }
 
         next();
 
