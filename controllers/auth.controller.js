@@ -8,12 +8,11 @@ const loginUser = (req, resp) => {
     let query = `SELECT * FROM user where mail = '${mail}'`;
     getLogin(query)
     .then(usuario => {
-
+        
         if(usuario.length != 0) {
-
-            console.log(usuario);
-            if(usuario[0].password === password){
-
+            const validPassword = bcrypt.compareSync( password, usuario[0].password );
+            if(validPassword){
+                console.log(usuario[0].password)
                 //generar el token y devolverlo. 
                 const { id } = usuario[0];
                 generarJWT(id)
