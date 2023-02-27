@@ -12,7 +12,7 @@ const loginUser = (req, resp) => {
         if(usuario.length != 0) {
             const validPassword = bcrypt.compareSync( password, usuario[0].password );
             if(validPassword){
-                console.log(usuario[0].password)
+                // console.log(usuario[0].password)
                 //generar el token y devolverlo. 
                 const { id } = usuario[0];
                 generarJWT(id)
@@ -23,6 +23,11 @@ const loginUser = (req, resp) => {
                     resp.json(token);
                 })
                     
+            }else {
+                resp.json({
+                    status : "error",
+                    message : "datos incorrectos", 
+                });
             }
         }else {
             resp.json({
