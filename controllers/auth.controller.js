@@ -17,7 +17,6 @@ const loginUser = (req, resp) => {
                 const { id } = usuario[0];
                 generarJWT(id)
                 .then(token => {
-                    console.log(token);
                     resp.json(token);
                 }).catch(error => {
                     resp.json(token);
@@ -140,11 +139,23 @@ const newPassword = (req, resp) => {
      
 }
 
+const renewToken = async (req, res)=>{
+
+    const { id, mail }  = req.data_x_toke;
+    // Generar el TOKEN - JWT
+    const token = await generarJWT( id, mail );
+    res.status(200).json({
+        ok: true, 
+        token
+    })
+}
+
 const SendMail = (token, mail) => {
     
 }
 module.exports = {
     loginUser,
     resetPassword,
-    newPassword
+    newPassword,
+    renewToken
 }
