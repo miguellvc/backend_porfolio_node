@@ -6,6 +6,12 @@ const getUsers = (req, resp) => {
     gets(req, resp, query);
 }
 
+const getUser = (req, resp) => {
+    const query = `SELECT name, surname, mail, url_img FROM user where id = ${req.params.id}`;
+    gets(req, resp, query);
+
+}
+
 const postUser = (req, resp) => {
     const { name, surname, mail, password, url_img } = req.body;
     let query = `INSERT INTO user (name, surname, mail, password, url_img) VALUES ('${name}', '${surname}', '${mail}', '${password}', '${url_img}')`;
@@ -13,5 +19,6 @@ const postUser = (req, resp) => {
 }
 module.exports = {
     getUsers,
-    postUser
+    postUser,
+    getUser
 }
